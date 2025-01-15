@@ -1,0 +1,473 @@
+@charset "utf-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	text-rendering: geometricPrecision;
+	box-sizing: border-box;
+}
+
+*:after, *::before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+button::-moz-focus-inner, 
+input[type="reset"]::-moz-focus-inner, 
+input[type="button"]::-moz-focus-inner, 
+input[type="submit"]::-moz-focus-inner, 
+input[type="file"]>input[type="button"]::-moz-focus-inner {
+	padding: 0px;
+	border: none;
+	-webkit-appearance: caret;
+	-webkit-appearance: none;
+	@include border-radius(0);
+}
+
+a {
+    text-decoration: none;;
+}
+
+html {
+	min-height: 100%;
+}
+
+body {
+    font-family: "Roboto Condensed", serif;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1.8;
+	color: #000;
+	background-color: #fff;
+}
+  
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #000;
+    z-index: 2;
+}
+
+.fix-header header {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Header Navigation */
+nav {
+    transition: all 0.3s ease-in-out;
+}
+
+.navigation {
+    height: 100%;
+    width: auto;
+}
+
+.menu {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.menu li a {
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff;
+}
+/* End Of Header Navigation */
+
+header .phone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+header .phone img {
+    height: auto;
+    margin: 0 10px 0 0;
+}
+
+header .logo {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 50%;
+    -webkit-box-shadow: inset -1px 3px 8px 5px #e6ab72, 2px 5px 16px 0px #000, 5px 5px 15px 5px rgba(0,0,0,0); 
+    box-shadow: inset -1px 3px 8px 5px #e6ab72, 2px 5px 16px 0px #000, 5px 5px 15px 5px rgba(0,0,0,0);
+    transition: all 0.3s ease-in-out;
+}
+
+header .logo img {
+    width: 100%;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.header-content .idea {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    color: #fff;
+}
+
+.header-content .idea h2 {
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.header-content .idea p {
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.header-content img {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 150px);
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+}
+
+#moon-calendar .alert {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    color: #fff;
+    background-color: #e6ab72;
+}
+
+#moon-calendar .alert img {
+    height: auto;
+}
+
+#moon-calendar .alert p {
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+#moon-calendar .reservation-form {
+    display: flex;
+}
+
+#moon-gallery h2 {
+    text-transform: uppercase;
+    font-weight: 300;
+    line-height: 1.3;
+}
+
+#moon-gallery p {
+    font-weight: 300;
+    line-height: 1.3;
+}
+
+#moon-gallery .gallery-wrap {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+@media screen and ( min-device-width: 1024px ){
+    header {
+        padding: 0 30px;
+    }
+
+    nav {
+        height: 80px;
+    }
+
+    .section-navigation {
+        display: none;
+    }
+    
+    .fix-header header nav {
+        height: 50px;
+    }
+
+    .menu {
+        display: flex !important;
+    }
+
+    .menu li {
+        margin: 0 30px 0 0;
+    }
+    
+    .menu li a {
+        font-size: 31px;
+    }
+
+    header .logo {
+        width: 100px;
+        height: 100px;
+        top: 20px;
+    }
+    
+    .fix-header header .logo {
+        top: 10px;
+        width: 70px;
+        height: 70px;
+    }
+
+    header .phone {
+        font-size: 31px;
+    }
+
+    header .phone img {
+        width: 16px;
+    }
+
+    .header-content .idea {
+        top: 60px;
+    }
+
+    .header-content .idea h2 {
+        font-size: 53px;
+    }
+    
+    .header-content .idea p {
+        font-size: 24px;
+    }
+
+    #moon-calendar, 
+    #moon-gallery {
+        padding: 50px 30px 0;
+    }
+
+    #moon-gallery h2 {
+        font-size: 51px;
+        margin: 0;
+    }
+
+    #moon-gallery p {
+        font-size: 21px;
+        margin: 0 0 20px 0;
+    }
+
+    #moon-calendar .alert {
+        padding: 30px;
+        margin: 0 0 30px 0;
+    }
+
+    #moon-calendar .alert img {
+        width: 100px;
+        margin: 5px 20px 0 0;
+    }
+    
+    #moon-calendar .alert p {
+        font-size: 27px;
+    }
+
+    #moon-calendar .reservation-form {
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}
+
+@media screen and ( max-width: 1024px ) {
+    header {
+        padding: 0 10px;
+    }
+
+    .header-content img {
+        height: calc(100vh - 500px);
+    }
+
+    nav {
+        height: 50px;
+    }
+    
+    .fix-header header nav {
+        height: 40px;
+    }
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 101;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    .section-navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .section-navigation .icon {
+        display: block;
+        width: 32px;
+        height: 32px;
+    }
+
+    .section-navigation .icon-close {
+        display: none;
+        background: url(../images/icon-close.png) center center no-repeat;
+    }
+
+    .section-navigation.active .icon-close {
+        display: block;
+    }
+
+    .section-navigation .icon-menu {
+        background: url(../images/icon-menu.png) center center no-repeat;
+    }
+
+    .section-navigation.active .icon-menu {
+        display: none;
+    }
+
+    .navigation .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        left: 0;
+        position: fixed;
+        top: 50px;
+        z-index: 100;
+        width: 60%;
+        height: calc(100vh - 50px);
+        margin: 0;
+        padding: 10px 0;
+        background-color: #fcfcfc;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .fix-header .navigation .menu {
+        top: 40px;
+        height: calc(100vh - 40px);
+    }
+      
+    .menu li {
+        width: 100%;
+        padding: 0;
+        margin: 0 0 5px 0;
+        border-bottom: 1px solid #000;
+        transition-delay: 2s;
+    }
+
+    .menu li a {
+        display: block;
+        width: 100%;
+        padding: 0 10px;
+        font-size: 21px;
+        color: #000;
+    }
+      
+    .navigation input:checked ~ ul {
+        transform: none;
+    }
+
+    header .logo {
+        width: 60px;
+        height: 60px;
+        top: 10px;
+        z-index: 100;
+    }
+    
+    .fix-header header .logo {
+        top: 10px;
+        width: 50px;
+        height: 50px;
+    }
+
+    header .phone {
+        font-size: 21px;
+    }
+
+    header .phone img {
+        width: 12px;
+    }
+
+    .header-content .idea {
+        top: 45px;
+        width: 90%;
+        left: 5%;
+        padding: 20px 10px;
+        background-color: rgba(0, 0, 0, .5);
+    }
+
+    .header-content .idea h2 {
+        font-size: 25px;
+        margin: 0 0 10px 0;
+    }
+    
+    .header-content .idea p {
+        font-size: 21px;
+        line-height: 1.2;
+    }
+
+    #moon-calendar, 
+    #moon-gallery {
+        padding: 50px 10px 20px;
+    }
+
+    #moon-gallery h2 {
+        font-size: 31px;
+        margin: 0;
+    }
+
+    #moon-gallery p {
+        font-size: 21px;
+        margin: 0 0 20px 0;
+    }
+
+    #moon-calendar .alert {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin: 0 0 20px 0;
+        text-align: center;
+    }
+
+    #moon-calendar .alert img {
+        width: 60px;
+        margin: 0 20px 0 0;
+    }
+    
+    #moon-calendar .alert p {
+        font-size: 21px;
+    }
+
+    #moon-calendar .reservation-form {
+        flex-direction: column;
+    }
+
+    #moon-calendar .reservation-form .google-form {
+        width: 100% !important;
+        height: 1220px;
+    }
+
+    #moon-calendar .reservation-form .google-calendar {
+        width: 100% !important;
+    }
+}
