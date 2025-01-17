@@ -78,15 +78,7 @@ $(document).ready(function(){
 	// if (320 <= window.innerWidth) {
 	// 	$("head").append('<script type="text/javascript" src="js/stickyhead.js"></script>,');
 	// }
-	
-	$("#img-gallery").justifiedGallery({
-		lastRow : 'left',
-		rowHeight: 130,
-		captions: true,
-        margins: 5, 
-        rel: 'gallery'
-    }).on('jg.complete', function () {
-        $('.jg-entry').swipebox();
-    });	
+
+	$('.swipebox').swipebox();
 });
 

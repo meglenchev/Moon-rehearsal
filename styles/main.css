@@ -185,8 +185,27 @@ header .logo img {
 }
 
 #moon-gallery .gallery-wrap {
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
     background-color: rgba(0, 0, 0, .2);
+}
+
+#moon-gallery .gallery-wrap #img-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#moon-gallery .gallery-wrap .swipebox {
+    display: block;
+    margin: 0 0 10px 0;
+}
+
+#moon-gallery .gallery-wrap .swipebox img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
 }
 
 @media screen and ( min-device-width: 1024px ){
@@ -263,6 +282,10 @@ header .logo img {
     #moon-gallery p {
         font-size: 21px;
         margin: 0 0 20px 0;
+    }
+
+    #moon-gallery .gallery-wrap .swipebox {
+        width: calc(25% - 5px);
     }
 
     #moon-calendar .alert {
@@ -439,6 +462,10 @@ header .logo img {
     #moon-gallery p {
         font-size: 21px;
         margin: 0 0 20px 0;
+    }
+
+    #moon-gallery .gallery-wrap .swipebox {
+        width: calc(50% - 5px);
     }
 
     #moon-calendar .alert {
