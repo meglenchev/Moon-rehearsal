@@ -192,14 +192,14 @@ header .logo img {
 }
 
 #moon-gallery .gallery-wrap {
-    padding: 20px 20px 10px 20px;
+    padding: 20px 10px 10px 15px;
     background-color: rgba(0, 0, 0, .2);
 }
 
 #moon-gallery .gallery-wrap #img-gallery {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 #moon-gallery .gallery-wrap .swipebox {
@@ -285,7 +285,10 @@ header .logo img {
         font-size: 24px;
     }
 
-    #moon-calendar, 
+    #moon-calendar {
+        padding: 50px 30px 0;
+    }
+
     #moon-gallery {
         padding: 50px 30px 0;
     }
@@ -302,7 +305,9 @@ header .logo img {
     }
 
     #moon-gallery .gallery-wrap .swipebox {
-        width: calc(25% - 5px);
+        width: calc(33.33% - 10px);
+        margin-right: 5px;
+        margin-left: 5px;
     }
 
     #moon-calendar .alert {
@@ -331,7 +336,7 @@ header .logo img {
     }
 
     .header-content img {
-        height: calc(100vh - 500px);
+        height: calc(100vh - 300px);
     }
 
     nav {
@@ -457,7 +462,7 @@ header .logo img {
     }
 
     .header-content .idea h2 {
-        font-size: 25px;
+        font-size: 21px;
         margin: 0 0 10px 0;
     }
     
@@ -479,6 +484,10 @@ header .logo img {
     #moon-gallery p {
         font-size: 21px;
         margin: 0 0 20px 0;
+    }
+
+    #moon-gallery .gallery-wrap #img-gallery {
+        justify-content: space-between;
     }
 
     #moon-gallery .gallery-wrap .swipebox {
