@@ -105,8 +105,9 @@
                 var phone = document.getElementById('phone').value;
                 var dateStart = document.getElementById('dateStart').value;
                 var dateEnd = document.getElementById('dateEnd').value;
+                var captcha = document.getElementById('captcha').value;
                 
-                if (name && dateStart && dateEnd && phone) {
+                if (name && dateStart && dateEnd && phone && captcha) {
                 	                	
                 	var splitDate = dateStart.split(" ");
                 	
@@ -117,11 +118,11 @@
                 	var error = false;
                 	
                 	$.ajax({
-    			   	    url: '/ceco/func.php',
+    			   	    url: '/func.php',
     			        type: 'POST',
     			        async: false,
     			        dataType: 'html',
-    			        data: {'event':json, 'action':'check'},
+    			        data: {'event':json,'captcha': captcha, 'action':'check'},
     			        success: function (res) {
     			            if(res) {
     			            	error = true;
@@ -146,7 +147,7 @@
 	    				}));
 	    				
 	    			    $.ajax({
-	    			   	    url: '/ceco/func.php',
+	    			   	    url: '/func.php',
 	    			        type: 'POST',
 	    			        async: false,
 	    			        data: {'event':json, 'action':'save'},
@@ -159,6 +160,9 @@
 	                    document.getElementById('dateEnd').value = '';
 	                    document.getElementById('phone').value = '';
 	                    document.getElementById('name').value = '';
+	                    document.getElementById('captcha').value = '';
+	                    
+	                    alert('Репетиционната е запазена');
                 	}
                 } else {
                     alert('Моля попълнете полетата');
@@ -173,7 +177,7 @@
 		    	
 		    	if(confirm('Наистина ли искате да изтриете записа?')) {
 	               	$.ajax({
-	   			   	    url: '/ceco/func.php',
+	   			   	    url: '/func.php',
 	   			        type: 'POST',
 	   			        async: false,
 	   			        dataType: 'html',
@@ -191,7 +195,7 @@
     	function addEvents(calendar, remove = 0)
     	{
     		$.ajax({
-		   	    url: '/ceco/func.php',
+		   	    url: '/func.php',
 		        type: 'POST',
 		        data: {'action':'get'},
 		        success: function (res) {
@@ -295,6 +299,9 @@
 					
 					<label form="dateEnd">Час за край на репетицията</label>
 					<input type="text" id="dateEnd" name="dateEnd" value=""  class="timepicker"><br>
+					
+					<img src="captcha.php" alt="CAPTCHA Image">
+					<input type="text" name="captcha" id="captcha">
 					
 					<button id="saveAction">Запази</button>
 				</form>

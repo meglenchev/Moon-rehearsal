@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $action = isset($_POST['action']) ? $_POST['action'] : 'get';
 
 $event = isset($_POST['event']) ? json_decode($_POST['event'], true) : '';
@@ -107,6 +109,14 @@ function delete()
 function check()
 {
     global $event, $file;
+    
+    $captcha = trim($_POST['captcha']);
+    
+    if (!isset($_SESSION['captcha']) || strtolower($captcha) !== strtolower($_SESSION['captcha'])) {
+        return 'Невалидна код';
+        
+        exit;
+    }
     
     if(count($event)) {
         
