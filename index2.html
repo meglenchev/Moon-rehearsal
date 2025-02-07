@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="bg">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no, minimal-ui, viewport-fit=cover">
+        <meta name="title" content="Moon репетиционната">
+        <meta name="description" content="Музикална репетиционна">
+
+        <meta property="og:title" content="Музикална репетиционна намираща се в Асеновград">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="Тук може да репетирате на спокойствие сред природата">
+        <meta property="og:image" content="http://moon-room.eu/images/moon-room.jpg">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="628">
+
+        <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+        <link rel="shortcut icon" href="images/favicon/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+        <link rel="manifest" href="images/favicon/site.webmanifest">
+
+        <link href="styles/main.css" rel="stylesheet" type="text/css" media="screen">
+
+        <title>Moon репетиционната</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">   
+        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	    <script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
+        <link href="styles/swipebox.min.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+        <script type="text/javascript" src="js/wow.min.js"></script>
+        <script type="text/javascript" src="js/stickyhead.js"></script>
+        <script type="text/javascript" src="js/aplication.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+		
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js"></script>
+		
+		<script>
+    	$(document).ready(function () {
+    		
+    		const urlParams = new URLSearchParams(window.location.search);
+    		const isDelete = urlParams.get('delete');
+
+    		$.datetimepicker.setLocale('bg');
+    		
+    		$('.datepicker').datetimepicker({
+    			format: 'Y-m-d H:i', 
+    			step: 30
+    		});
+    		$('.timepicker').datetimepicker({
+    			timepicker: true,
+    			datepicker: false,
+    			format: 'H:i', 
+    			step: 30
+    		});
+    		
+    		var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                selectable: true,
+                editable: false,
+                events: [],
+                firstDay: 1,
+                locale: 'bg',
+                contentHeight: 740,
+                buttonText: {
+                    today: 'Днес',
+                    dayGridWeek: 'Седмица',
+                    dayGridMonth: 'Месец',
+                    list: 'Списък'
+                  },
+                headerToolbar: {
+  	              left: 'prev,next today',
+  	              center: 'title',
+  	              right: 'dayGridWeek,listMonth,dayGridMonth'
+  	            },
+	  	          eventContent: function(arg, createElement) {
+
+                  	var startDate = new Date(arg.event.start);
+                  	var endDate = new Date(arg.event.end);
+                  	
+                  	var formatStart = startDate.getHours() + ':' + startDate.getMinutes().toString().padStart(2, '0');
+                  	var formatEnd = endDate.getHours() + ':' + endDate.getMinutes().toString().padStart(2, '0');
+                  	
+                  	if(isDelete) {
+		        	  	return {html : '<div style="background-color:#e6ab72;width:100%;padding-left:5px;">ИМЕ: ' + arg.event.title + '<br>НАЧАЛЕН ЧАС: ' + formatStart + '<br>КРАЕН ЧАС: ' + formatEnd + ' <a href="javascript:;" id="'+arg.event.groupId+'" class="delete" style="position:absolute;top:0px; right:4px;">X</a></div>'}
+                  	} else {
+		        		return {html : '<div style="background-color:#e6ab72;width:100%;padding-left:5px;">ИМЕ: ' + arg.event.title + '<br>НАЧАЛЕН ЧАС: ' + formatStart + '<br>КРАЕН ЧАС: ' + formatEnd + '</div>'}
+                  	}
+		          },
+            });
+            calendar.render();
+                        
+            addEvents(calendar);
+		    
+		    $('#saveAction').on('click', function() {
+		    	
+		    	var name = document.getElementById('name').value;
+                var phone = document.getElementById('phone').value;
+                var dateStart = document.getElementById('dateStart').value;
+                var dateEnd = document.getElementById('dateEnd').value;
+                
+                if (name && dateStart && dateEnd && phone) {
+                	                	
+                	var splitDate = dateStart.split(" ");
+                	
+                	dateEnd = splitDate[0] + ' ' + dateEnd;
+                	
+                	var json = JSON.stringify({title: name, phone: phone, end: dateEnd, start: dateStart});
+                	
+                	var error = false;
+                	
+                	$.ajax({
+    			   	    url: '/ceco/func.php',
+    			        type: 'POST',
+    			        async: false,
+    			        dataType: 'html',
+    			        data: {'event':json, 'action':'check'},
+    			        success: function (res) {
+    			            if(res) {
+    			            	error = true;
+    			            	alert(res);
+    			            }
+    			        }
+    			    });
+
+                	if(!error) {
+	                    calendar.addEvent({
+	                        title: name,
+	                        groupId: phone,
+	                        start: dateStart,
+	                        end: dateEnd,
+	                        allDay: false
+	                    });
+	                    
+	                    var events = calendar.getEvents().map(event => ({
+	    					title: event.title,
+	    					start: event.start,
+	    					end: event.end,
+	    				}));
+	    				
+	    			    $.ajax({
+	    			   	    url: '/ceco/func.php',
+	    			        type: 'POST',
+	    			        async: false,
+	    			        data: {'event':json, 'action':'save'},
+	    			        success: function (res) {
+	    			            
+	    			        }
+	    			    });
+	    			    
+	                    document.getElementById('dateStart').value = '';
+	                    document.getElementById('dateEnd').value = '';
+	                    document.getElementById('phone').value = '';
+	                    document.getElementById('name').value = '';
+                	}
+                } else {
+                    alert('Моля попълнете полетата');
+                }
+			    
+			    return false;
+		    })
+		    
+		    $(document).on('click','.delete', function() {
+
+		    	var id = $(this).attr('id');
+		    	
+		    	if(confirm('Наистина ли искате да изтриете записа?')) {
+	               	$.ajax({
+	   			   	    url: '/ceco/func.php',
+	   			        type: 'POST',
+	   			        async: false,
+	   			        dataType: 'html',
+	   			        data: {'id':id, 'action':'delete'},
+	   			        success: function (res) {
+	   			        	addEvents(calendar, 1);
+	   			        }
+	   			    });
+		    	}
+
+			    return false;
+		    })
+    	})
+    	
+    	function addEvents(calendar, remove = 0)
+    	{
+    		$.ajax({
+		   	    url: '/ceco/func.php',
+		        type: 'POST',
+		        data: {'action':'get'},
+		        success: function (res) {
+		        	
+		        	if(remove) {
+		        		calendar.removeAllEvents();
+		        	}
+		        	if(res) {
+			        	var events = JSON.parse(res);
+	                    events.forEach(event => {
+	                        calendar.addEvent({
+	                        	 title: event.title,
+	                             groupId: event.id,
+	                             start: event.start,
+	                             end: event.end,
+	                             allDay: false
+	                        });
+	                    }); 
+			        }
+		        }
+		    });
+    	}
+    </script>
+    </head>
+    <body class="moon">
+        <article id="moon-home" class="wow">
+            <header> 
+                <nav role="navigation">
+                    <div class="navigation">
+                        <button class="section-navigation" data-target="#section-collapse">
+                            <i class="icon icon-close"></i>
+                            <i class="icon icon-menu"></i>
+                        </button>
+
+                        <ul class="menu" id="section-collapse" style="display: none;">
+                            <li><a href="#moon-home">Начало</a></li>
+                            <li><a href="#moon-gallery">Галерия</a></li>
+                            <li><a href="#moon-calendar">Запази си час</a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <h1 class="logo"><a href="/" title="Moon Rehearsal"><img src="images/moon-rehearsal.png" alt="Moon Rehearsal"></a></h1>
+
+                <a href="tel:0883465033" class="phone" title="0883465033"><img src="images/icon-phone.png" alt=""> 0883465033</a>
+            </header>
+            <section class="header-content">
+                <div class="idea">
+                    <h2>Moon репетиционната</h2>
+                    <p>Създадохме място извън града, където на спокойствие може да репетирате!</p>
+                </div>
+                <img src="images/moon.jpg" alt="" />
+            </section>
+        </article>
+        <!-- End of Home/Header -->
+        <article id="moon-gallery" class="wow">
+            <h2>Галерия</h2>
+            <p>Ето как изглежда рапатиционната и мястото, където се намира.</p>
+            <div class="gallery-wrap">
+                <div id="img-gallery">
+                    <a href="images/gallery/1.jpg" class="swipebox">
+                        <img src="images/gallery/1.jpg" alt="Moon репетиционната">
+                    </a>
+                    <a href="images/gallery/2.jpg" class="swipebox">
+                        <img src="images/gallery/2.jpg" alt="Moon репетиционната">
+                    </a>
+                    <a href="images/gallery/3.jpg" class="swipebox">
+                        <img src="images/gallery/3.jpg" alt="Moon репетиционната">
+                    </a>
+                    <a href="images/gallery/5.jpg" class="swipebox">
+                        <img src="images/gallery/5.jpg" alt="Moon репетиционната">
+                    </a>
+                    <a href="images/gallery/7.jpg" class="swipebox">
+                        <img src="images/gallery/7.jpg" alt="Moon репетиционната">
+                    </a>
+                    <a href="images/gallery/8.jpg" class="swipebox">
+                        <img src="images/gallery/8.jpg" alt="Moon репетиционната">
+                    </a>
+                </div>
+            </div>
+        </article>
+        <!-- End of Moon Gallery -->
+
+        <article id="moon-calendar" class="wow">
+            <h2>Запази си час</h2>
+            <div class="alert">
+                <img src="images/icon-alert.png" alt="">
+                <p>При запазване на час, задължително е да оставите телефон за връзка. В противен случай, запазения от вас час няма да се вземе под внимание! <br>Благодарим за разбирането.</p>
+            </div>
+
+            <div class="reservation-form">
+				<form>
+					<label form="name">Име</label>
+					<input type="text" id="name" name="name" value=""><br>
+					
+					<label form="phone">Телефон</label>
+					<input type="text" id="phone" name="phone" value=""><br>
+					
+					<label form="dateStart">Дата и Час на репетицията</label>
+					<input type="text" id="dateStart" name="dateStart" value="" class="datepicker"><br>
+					
+					<label form="dateEnd">Час за край на репетицията</label>
+					<input type="text" id="dateEnd" name="dateEnd" value=""  class="timepicker"><br>
+					
+					<button id="saveAction">Запази</button>
+				</form>
+                <div id='calendar' style="width:70%;"></div>
+            </div>
+        </article>
+        <!-- End of Moon Calendar -->
+        <footer class="wow"></footer>
+    </body>
+</html>
