@@ -48,7 +48,11 @@ function save()
             
             $to = "jorkooo@gmail.com";
             $subject = "Запазване на репетиционна";
-            $message = "Здравейте имате нова резервация: <br> Име: " . $event['name'] . ' <br>Телефон: ' . $event['phone'] . ' <br>Дата: ' . date('Y-m-d H:i', strtotime($event['start']));
+            $message = "Здравейте имате нова резервация: 
+                        Име: " . $event['title'] . '
+                        Телефон: ' . $event['phone'] . ' 
+                        Дата: ' . date('d.m.Y H:i', strtotime($event['start'])) . ' 
+                        Краен час: ' . date('H:i', strtotime($event['end']));
             
             mail($to, $subject, $message);
         } catch (Exception $e) {
