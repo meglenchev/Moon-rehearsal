@@ -143,6 +143,15 @@ header .logo img {
     line-height: 1;
 }
 
+.header-content .idea h2 span {
+    display: inline-block;
+    width: 48px;
+    height: 53px;
+    text-indent: -999999px;
+    background: url(../images/anarchy.png) center center no-repeat;
+    background-size: cover;
+}
+
 .header-content .idea p {
     font-weight: 300;
     text-transform: uppercase;
@@ -153,6 +162,7 @@ header .logo img {
     width: 100%;
     height: calc(100vh - 150px);
     object-fit: cover;
+    object-position: center;
     margin: 0;
     padding: 0;
 }
@@ -464,6 +474,14 @@ header .logo img {
     .header-content .idea h2 {
         font-size: 21px;
         margin: 0 0 10px 0;
+        letter-spacing: 0.1rem;
+    }
+
+    .header-content .idea h2 span {
+        width: 26px;
+        height: 29px;
+        position: relative;
+        top: -4px;
     }
     
     .header-content .idea p {
