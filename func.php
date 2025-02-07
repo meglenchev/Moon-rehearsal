@@ -6,7 +6,7 @@ $event = isset($_POST['event']) ? json_decode($_POST['event'], true) : '';
 $delete = isset($_GET['delete']) ? 1 : 0;
 $id = isset($_POST['id']) ? $_POST['id'] : 0;
 
-$file = $_SERVER['DOCUMENT_ROOT'] . '/ceco/events/event.txt';
+$file = $_SERVER['DOCUMENT_ROOT'] . '/events/event.txt';
 
 
 if($action == 'get') {
