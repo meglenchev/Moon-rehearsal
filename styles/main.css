@@ -189,6 +189,101 @@ header .logo img {
     display: flex;
 }
 
+#moon-calendar .calendar-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+#moon-calendar .calendar-form div {
+    position: relative;
+    margin: 0 0 10px 0;
+    padding: 15px 0 0 0;
+}
+
+#moon-calendar .calendar-form input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0 15px;
+    color: #000;
+    font-size: 17px;
+    font-weight: 400;
+    border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, .2);
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+#moon-calendar .calendar-form input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-box-shadow: 0 0 0 50px #ffffff inset !important;
+    -webkit-text-fill-color: #000;
+    border: 1px solid rgba(0, 0, 0, .2) !important;
+}
+
+#moon-calendar .calendar-form label {
+    position: absolute;
+    top: 0px;
+    left: 15px;
+    padding: 0 10px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, .6);
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+#moon-calendar .calendar-form label .req {
+    color: #e6ab72;
+}
+
+#moon-calendar .calendar-form button {
+    width: 100%;
+    height: 40px;
+    font-family: "Roboto Condensed", serif;
+    font-size: 17px;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    background-color: #e6ab72;
+    transition: all 0.3s ease-in-out;
+}
+
+#moon-calendar #calendar .fc-button {
+    border-radius: 0;
+    background-color: #848484;
+    border: none;
+    margin: 0 1px 0 0;
+    font-family: "Roboto Condensed", serif;
+    font-size: 17px;
+    font-weight: 300;
+    transition: all 0.3s ease-in-out;
+}
+
+#moon-calendar #calendar .fc-button:disabled {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+#moon-calendar #calendar .fc-button:focus {
+    box-shadow: none;
+}
+
+#moon-calendar #calendar.fc-theme-standard td, 
+#moon-calendar #calendar.fc-theme-standard th {
+    font-weight: 300;
+}
+
+#moon-calendar #calendar.fc-theme-standard .fc-col-header {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+#moon-calendar #calendar .fc-daygrid-day.fc-day-today {
+    background-color: #fff3e8;
+}
+
 #moon-gallery h2, 
 #moon-calendar h2 {
     text-transform: uppercase;
@@ -296,7 +391,7 @@ header .logo img {
     }
 
     #moon-calendar {
-        padding: 50px 30px 0;
+        padding: 50px 30px;
     }
 
     #moon-gallery {
@@ -337,6 +432,27 @@ header .logo img {
     #moon-calendar .reservation-form {
         align-items: flex-start;
         justify-content: space-between;
+    }
+
+    #moon-calendar .calendar-form {
+        width: 30%;
+        margin-right: 30px;
+    }
+
+    #moon-calendar #calendar {
+        width: 70%;
+    }
+
+    #moon-calendar .calendar-form button:hover, 
+    #moon-calendar #calendar .fc-button:not(:disabled):hover {
+        background-color: #000;
+    }
+
+    #moon-calendar .calendar-form input:hover, 
+    #moon-calendar .calendar-form input:focus, 
+    #moon-calendar .calendar-form input:-webkit-autofill:hover, 
+    #moon-calendar .calendar-form input:-webkit-autofill:focus {
+        border-color: #e6ab72 !important;
     }
 }
 
@@ -533,12 +649,7 @@ header .logo img {
         flex-direction: column;
     }
 
-    #moon-calendar .reservation-form .google-form {
-        width: 100% !important;
-        height: 1220px;
-    }
-
-    #moon-calendar .reservation-form .google-calendar {
-        width: 100% !important;
+    #moon-calendar .calendar-form {
+        width: 100%;
     }
 }

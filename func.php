@@ -48,7 +48,7 @@ function save()
         
         try {
             
-            $to = "jorkooo@gmail.com";
+            $to = "t.meglenchev@gmail.com";
             $subject = "Запазване на репетиционна";
             $message = "Здравейте имате нова резервация: 
                         Име: " . $event['title'] . '
