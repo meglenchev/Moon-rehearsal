@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $action = isset($_POST['action']) ? $_POST['action'] : 'get';
 
 $event = isset($_POST['event']) ? json_decode($_POST['event'], true) : '';
@@ -48,7 +46,7 @@ function save()
         
         try {
             
-            $to = "t.meglenchev@gmail.com";
+            $to = "Ivanandonov00200@gmail.com, t.meglenchev@gmail.com";
             $subject = "Запазване на репетиционна";
             $message = "Здравейте имате нова резервация: 
                         Име: " . $event['title'] . '
@@ -109,14 +107,6 @@ function delete()
 function check()
 {
     global $event, $file;
-    
-    $captcha = trim($_POST['captcha']);
-    
-    if (!isset($_SESSION['captcha']) || strtolower($captcha) !== strtolower($_SESSION['captcha'])) {
-        return 'Невалидна код';
-        
-        exit;
-    }
     
     if(count($event)) {
         

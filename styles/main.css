@@ -284,6 +284,26 @@ header .logo img {
     background-color: #fff3e8;
 }
 
+#moon-calendar #calendar.fc .fc-daygrid-event .reservation {
+    display: block;
+    width: 100%;
+    padding: 3px;
+    line-height: 1.3;
+    font-size: 14px;
+    color: #000;
+    background-color: #e6ab72;
+}
+
+#moon-calendar .calendar-form .captcha-wrap label {
+    display: block;
+    position: static;
+    top: unset;
+    left: unset;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
 #moon-gallery h2, 
 #moon-calendar h2 {
     text-transform: uppercase;
@@ -435,12 +455,12 @@ header .logo img {
     }
 
     #moon-calendar .calendar-form {
-        width: 30%;
+        width: 25%;
         margin-right: 30px;
     }
 
     #moon-calendar #calendar {
-        width: 70%;
+        width: 75%;
     }
 
     #moon-calendar .calendar-form button:hover, 
@@ -651,5 +671,44 @@ header .logo img {
 
     #moon-calendar .calendar-form {
         width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #moon-calendar #calendar.fc .fc-toolbar-title {
+        display: block;
+        width: 100%;
+        font-size: 21px;
+        text-transform: none;
+        margin: 10px 0;
+    }
+
+    #moon-calendar #calendar.fc .fc-toolbar.fc-header-toolbar {
+        flex-direction: column;
+    }
+
+    #moon-calendar #calendar.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk {
+        width: 100%;
+    }
+
+    #moon-calendar #calendar.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk .fc-button-group {
+        width: 100%;
+    }
+
+    #moon-calendar #calendar.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child .fc-button-group {
+        width: auto;
+    }
+
+    #moon-calendar #calendar.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child .fc-today-button {
+        display: none !important;
+    }
+
+    #moon-calendar .captcha-wrap {
+        width: 100%;
+    }
+
+    #moon-calendar .captcha-wrap img {
+        width: 100% !important;
+        min-width: 100%;
+        height: auto !important;
     }
 }

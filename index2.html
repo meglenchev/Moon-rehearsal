@@ -28,17 +28,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">   
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
 	    <script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
         <link href="styles/swipebox.min.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
         <script type="text/javascript" src="js/wow.min.js"></script>
         <script type="text/javascript" src="js/stickyhead.js"></script>
         <script type="text/javascript" src="js/aplication.js"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+		
 		<script src="https://cdn.jsdelivr.net/npm/fullcalendar/index.global.min.js"></script>
 		
 		<script>
@@ -89,9 +89,9 @@
                   	var formatEnd = endDate.getHours() + ':' + endDate.getMinutes().toString().padStart(2, '0');
                   	
                   	if(isDelete) {
-		        	  	return {html : '<span class="reservation">' + arg.event.title + ', начало: ' + formatStart + '<br>край: ' + formatEnd + ' <a href="javascript:;" id="'+arg.event.groupId+'" class="delete" style="position:absolute;top:0px; right:4px;">X</a></span>'}
+		        	  	return {html : '<div style="background-color:#e6ab72;width:100%;padding-left:5px;">ИМЕ: ' + arg.event.title + '<br>НАЧАЛЕН ЧАС: ' + formatStart + '<br>КРАЕН ЧАС: ' + formatEnd + ' <a href="javascript:;" id="'+arg.event.groupId+'" class="delete" style="position:absolute;top:0px; right:4px;">X</a></div>'}
                   	} else {
-		        		return {html : '<span class="reservation">' + arg.event.title + ', начало: ' + formatStart + '<br>край: ' + formatEnd + '</span>'}
+		        		return {html : '<div style="background-color:#e6ab72;width:100%;padding-left:5px;">ИМЕ: ' + arg.event.title + '<br>НАЧАЛЕН ЧАС: ' + formatStart + '<br>КРАЕН ЧАС: ' + formatEnd + '</div>'}
                   	}
 		          },
             });
@@ -105,9 +105,8 @@
                 var phone = document.getElementById('phone').value;
                 var dateStart = document.getElementById('dateStart').value;
                 var dateEnd = document.getElementById('dateEnd').value;
-                var captcha = document.getElementById('captcha').value;
                 
-                if (name && dateStart && dateEnd && phone && captcha) {
+                if (name && dateStart && dateEnd && phone) {
                 	                	
                 	var splitDate = dateStart.split(" ");
                 	
@@ -118,11 +117,11 @@
                 	var error = false;
                 	
                 	$.ajax({
-    			   	    url: '/func.php',
+    			   	    url: 'func.php',
     			        type: 'POST',
     			        async: false,
     			        dataType: 'html',
-    			        data: {'event':json,'captcha': captcha, 'action':'check'},
+    			        data: {'event':json, 'action':'check'},
     			        success: function (res) {
     			            if(res) {
     			            	error = true;
@@ -147,7 +146,7 @@
 	    				}));
 	    				
 	    			    $.ajax({
-	    			   	    url: '/func.php',
+	    			   	    url: 'func.php',
 	    			        type: 'POST',
 	    			        async: false,
 	    			        data: {'event':json, 'action':'save'},
@@ -160,9 +159,6 @@
 	                    document.getElementById('dateEnd').value = '';
 	                    document.getElementById('phone').value = '';
 	                    document.getElementById('name').value = '';
-	                    document.getElementById('captcha').value = '';
-	                    
-	                    alert('Репетиционната е запазена');
                 	}
                 } else {
                     alert('Моля попълнете полетата');
@@ -177,7 +173,7 @@
 		    	
 		    	if(confirm('Наистина ли искате да изтриете записа?')) {
 	               	$.ajax({
-	   			   	    url: '/func.php',
+	   			   	    url: 'func.php',
 	   			        type: 'POST',
 	   			        async: false,
 	   			        dataType: 'html',
@@ -195,7 +191,7 @@
     	function addEvents(calendar, remove = 0)
     	{
     		$.ajax({
-		   	    url: '/func.php',
+		   	    url: 'func.php',
 		        type: 'POST',
 		        data: {'action':'get'},
 		        success: function (res) {
@@ -290,35 +286,22 @@
             </div>
 
             <div class="reservation-form">
-				<form class="calendar-form">
-					<fieldset>
-						<div>
-							<label form="name">Име <span class="req">*</span></label>
-							<input type="text" id="name" name="name" value="" required >
-						</div>
-						<div>
-							<label form="phone">Телефон <span class="req">*</span></label>
-							<input type="text" id="phone" name="phone" value="" required >
-						</div>
-						<div>
-							<label form="dateStart">Дата и Час на репетицията <span class="req">*</span></label>
-							<input type="text" id="dateStart" name="dateStart" value="" class="datepicker" required >
-						</div>
-						<div>
-							<label form="dateEnd">Час за край на репетицията <span class="req">*</span></label>
-							<input type="text" id="dateEnd" name="dateEnd" value=""  class="timepicker" required >
-						</div>
-					</fieldset>
-					<!-- End of inputs -->
-					<div class="captcha-wrap">
-						<img src="captcha.php" alt="CAPTCHA Image">
-						<label form="dateEnd">Моля въведете символите от снимката</label>
-						<input type="text" name="captcha" id="captcha">
-					</div>
-					<!-- End of captcha -->
-					<button type="button" id="saveAction">Запази репетиция</button>
+				<form>
+					<label form="name">Име</label>
+					<input type="text" id="name" name="name" value=""><br>
+					
+					<label form="phone">Телефон</label>
+					<input type="text" id="phone" name="phone" value=""><br>
+					
+					<label form="dateStart">Дата и Час на репетицията</label>
+					<input type="text" id="dateStart" name="dateStart" value="" class="datepicker"><br>
+					
+					<label form="dateEnd">Час за край на репетицията</label>
+					<input type="text" id="dateEnd" name="dateEnd" value=""  class="timepicker"><br>
+					
+					<button id="saveAction">Запази</button>
 				</form>
-                <div id='calendar'></div>
+                <div id='calendar' style="width:70%;"></div>
             </div>
         </article>
         <!-- End of Moon Calendar -->
