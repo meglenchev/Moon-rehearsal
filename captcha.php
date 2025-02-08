@@ -24,7 +24,7 @@ for ($i = 0; $i < 5; $i++) {
 }
 
 // Add CAPTCHA text
-$font = __DIR__ . '/styles/arial.ttf'; // Make sure you have a font file in the same directory
+$font = __DIR__ . '/styles/Arial.ttf'; // Make sure you have a font file in the same directory
 
 imagettftext($image, 20, rand(-10, 10), 10, 30, $text_color, $font, $captcha_text);
 
