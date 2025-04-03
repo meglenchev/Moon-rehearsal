@@ -89,9 +89,9 @@
                   	var formatEnd = endDate.getHours() + ':' + endDate.getMinutes().toString().padStart(2, '0');
                   	
                   	if(isDelete) {
-		        	  	return {html : '<span class="reservation">' + arg.event.title + ', начало: ' + formatStart + '<br>край: ' + formatEnd + ' <a href="javascript:;" id="'+arg.event.groupId+'" class="delete" style="position:absolute;top:0px; right:4px;">X</a></span>'}
+		        	  	return {html : '<span class="reservation">' + arg.event.title + ', <br>начало: ' + formatStart + '<br>край: ' + formatEnd + ' <a href="javascript:;" id="'+arg.event.groupId+'" class="delete" style="position:absolute;top:0px; right:4px;">X</a></span>'}
                   	} else {
-		        		return {html : '<span class="reservation">' + arg.event.title + ', начало: ' + formatStart + '<br>край: ' + formatEnd + '</span>'}
+		        		return {html : '<span class="reservation">' + arg.event.title + ', <br>начало: ' + formatStart + '<br>край: ' + formatEnd + '</span>'}
                   	}
 		          },
             });
@@ -205,15 +205,16 @@
 		        	}
 		        	if(res) {
 			        	var events = JSON.parse(res);
-	                    events.forEach(event => {
-	                        calendar.addEvent({
-	                        	 title: event.title,
-	                             groupId: event.id,
-	                             start: event.start,
-	                             end: event.end,
+						
+						for(e in events) {console.log(events[e]);
+							calendar.addEvent({
+	                        	 title: events[e].title,
+	                             groupId: events[e].id,
+	                             start: events[e].start,
+	                             end: events[e].end,
 	                             allDay: false
 	                        });
-	                    }); 
+						}
 			        }
 		        }
 		    });
@@ -230,10 +231,11 @@
                             <i class="icon icon-menu"></i>
                         </button>
 
-                        <ul class="menu" id="section-collapse" style="display: none;">
-                            <li><a href="#moon-home">Начало</a></li>
-                            <li><a href="#moon-gallery">Галерия</a></li>
-                            <li><a href="#moon-calendar">Запази си час</a></li>
+                        <ul class="menu" id="section-collapse">
+                            <li><a href="#moon-home" title="Начало">Начало</a></li>
+                            <li><a href="#moon-gallery" title="Галерия">Галерия</a></li>
+							<li><a href="#moon-equipment" title="Оборудване">Оборудване</a></li>
+                            <li><a href="#moon-calendar" title="Запази си час">Запази си час</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -281,7 +283,22 @@
             </div>
         </article>
         <!-- End of Moon Gallery -->
-
+		<article id="moon-equipment" class="wow">
+            <h2>Оборудване</h2>
+			<p>Вижте с какво разполага репетиционната.</p>
+			<ul>
+				<li><strong>Китарни кубета:</strong> Peavey Bandit 112 , Fender deluxe 90</li>
+				<li><strong>Бас кубе:</strong> Behringer Ultrabass BX600</li>
+				<li><strong>Бас глава:</strong> Fender</li>
+				<li><strong>Кабинет:</strong> 1x 12” Altech Lansing</li>
+				<li><strong>P.A.:</strong> Миксер с усилвател Phonic PowerPod 740</li>
+				<li><strong>Колони:</strong> Koda 2 x 10”</li>
+				<li><strong>Микрофони:</strong> Shure M58</li>
+				<li><strong>Барабани:</strong> Tama Superstar</li>
+				<li><strong>Чинели:</strong> Фус-Paste PST5 2 x14”, Краш-Paste PST5 ,PST3 2 x 16”, Райд (Ритъм) – Paste 302   1 x 20”, Кравешки звънец, и други дранкулки</li>
+			</ul>
+		</article>
+		<!-- End of article list -->
         <article id="moon-calendar" class="wow">
             <h2>Запази си час</h2>
             <div class="alert">
